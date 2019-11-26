@@ -1,1 +1,69 @@
 @import "./test";
+
+html{
+    --main-color: rgb(74, 18, 165);
+    --acc-color: rgb(102, 61, 168);
+    --text-color: rgb(221, 200, 253);
+    
+    background: linear-gradient(120deg, var(--main-color), var(--acc-color), var(--text-color));
+    font-family: 'Roboto', sans-serif;
+
+    height: 100%;
+    width: 100%;
+}
+
+.title{
+    margin: 5%;
+    font-size: 3rem;
+    color: var(--text-color);
+    text-shadow: 15px 15px 1rem var(--text-color);
+    font-weight: bold;
+}
+
+.currConverter{
+    height: 60vh;
+    width: 40vw;
+    margin: 0 10%;
+
+    border-radius: 5%;
+    box-shadow: 20px 20px 2rem var(--acc-color);
+    background: linear-gradient(-60deg, var(--main-color), var(--acc-color));
+}
+
+.currConverterForm{
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center; 
+}
+
+.formInput{
+    width: 60%;
+    height: 10%;
+    margin: 5%;
+
+    font-size: 1.2rem;
+    color: var(--text-color);
+    font-weight: bold;
+
+    text-align: center;
+    border: none;
+    background: none;
+    box-shadow: 0px 0px 1rem var(--text-color);   
+}
+
+.formInput::placeholder{
+    font-size: .8rem;
+    color: var(--text-color);
+}
+
+.arrows{
+    font-size: 1.5rem;
+    color: var(--text-color);
+    font-weight: bold;
+
+    cursor: pointer;
+}
