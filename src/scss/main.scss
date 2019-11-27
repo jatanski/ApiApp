@@ -6,28 +6,95 @@ html{
     --text-color: rgb(221, 200, 253);
     
     background: linear-gradient(120deg, var(--main-color), var(--acc-color), var(--text-color));
+    background-attachment: fixed;
     font-family: 'Roboto', sans-serif;
 
     height: 100%;
     width: 100%;
 }
 
-.title{
-    margin: 5%;
-    font-size: 3rem;
-    color: var(--text-color);
-    text-shadow: 2px 2px .2rem var(--text-color);
-    font-weight: bold;
+.wrapper{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
-.currConverter{
-    height: 60vh;
-    width: 40vw;
-    margin: 0 10%;
+.menuBar{
+    position: sticky;
+    top: 2%;
+    left: 0;
 
-    border-radius: 5%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 100%;
+    height: 13vh;
+}
+
+.menuItem{
+    height: 80%;
+    width: 30%;
+    box-shadow: 0px 0px .2rem var(--main-color);   
+    border: 0.5px solid var(--text-color);
+    opacity: .8;
+    border-radius: 2%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.7rem;
+    color: var(--text-color);
+    box-shadow: 0px 0px .5rem var(--text-color);   
+}
+
+.menuItem:hover{
+    box-shadow: 0px 0px 2rem var(--text-color);   
+}
+
+.select{
+    color: var(--acc-color);
+    background: var(--text-color);
+}
+
+.content{
+    height: 80vh;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.box{
+    height: 50%;
+    width: 35%;
+    margin: 0 10%;
+    padding: 3%;
+
+
+    border-radius: 2%;
     box-shadow: 10px 10px .5rem var(--acc-color);
-    background: linear-gradient(-60deg, var(--main-color), var(--acc-color));
+    background: none;
+    border: 0.5px solid var(--text-color);
+    margin: 5%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    color: var(--text-color);
+    
+}
+
+.inputLabel{
+    font-size: .7rem;
+    align-self: flex-start;
+    margin: 0 20%;
 }
 
 .currConverterForm{
@@ -43,7 +110,6 @@ html{
 .formInput{
     width: 60%;
     height: 10%;
-    margin: 5%;
 
     font-size: 1.2rem;
     color: var(--text-color);
@@ -56,8 +122,9 @@ html{
 }
 
 .formInput::placeholder{
-    font-size: .8rem;
+    font-size: .6rem;
     color: var(--text-color);
+    opacity: .5;
 }
 
 .arrows{
