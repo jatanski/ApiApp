@@ -1,4 +1,5 @@
 import BaseView from "../views/view";
+import myChart from "../views/chart";
 import { callbackify } from "util";
 
 class MainCtrl {

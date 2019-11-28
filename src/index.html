@@ -25,16 +25,16 @@
         <div class="box">
           <form class="form">
             <label for="amountFrom" class="inputLabel">Amount</label>
-            <input type: "number" id="amountFrom" class="formInput" placeholder="Enter amount to convert" name="" required>
+            <input type="number" id="amountFrom" class="formInput" placeholder="Enter amount to convert" name="" required>
             <label for="currFrom" class="inputLabel">From</label>
-            <input type: "text" id="currFrom" class="formInput" placeholder="From (start typing)" name="" required>
+            <input type="text" id="currFrom" class="formInput" placeholder="From (start typing)" name="" required>
             <div class="arrows">
               <i class="fas fa-exchange-alt"></i>
             </div>
             <label for="currTo" class="inputLabel">To</label>
-            <input type: "text" id="currTo" class="formInput" placeholder="To (start typing)" name="" required>
+            <input type="text" id="currTo" class="formInput" placeholder="To (start typing)" name="" required>
             <label for="amountTo" class="inputLabel">Amount</label>
-            <input type: "number" id="amountTo" class="formInput" placeholder="Enter amount to convert" name="" required>  
+            <input type="number" id="amountTo" class="formInput" placeholder="Enter amount to convert" name="" required>  
           </form>
         </div>
         <div class="box">
@@ -46,23 +46,23 @@
         <div class="box">
           <form class="form">
             <label for="currency" class="inputLabel">Currency</label>
-            <input type: "text" id="currency" class="formInput" placeholder="Currency (start typing)" name="" required>
+            <input type="text" id="currency" class="formInput" placeholder="Currency (start typing)" name="" required>
             <i class="fas fa-sync"></i>
             <label for="currency" class="inputLabel">Currency</label>
-            <input type: "text" id="currency" class="formInput" placeholder="Currency (start typing)" name="" required>
+            <input type="text" id="currency" class="formInput" placeholder="Currency (start typing)" name="" required>
             <i class="fas fa-sync" style="visibility: hidden"></i>
             <label for="dateFrom" class="inputLabel">Start date</label>
-            <input type: "text" id="dateFrom" class="formInput" placeholder="[yyyy][mm][dd]" name="" required>
+            <input type="date" id="dateFrom" class="formInput" name="" required>
             <i class="fas fa-sync" style="visibility: hidden"></i>
             <label for="dateTo" class="inputLabel">End date</label>
-            <input type: "text" id="dateTo" class="formInput" placeholder="[yyyy][mm][dd]" name="" required>
+            <input type="date" id="dateTo" class="formInput" name="" required>
             <div class="chartIcon">
               <i class="fas fa-chart-line"></i>
             </div>
           </form>
         </div>
         <div class="box">
-            <img class="pic" src="http://www.yen-to-dollar.com/wp-content/uploads/2009/06/usdjpy17.jpg">
+            <canvas id="chart" class="chart"></canvas>
         </div>
       </div>
 
@@ -76,5 +76,6 @@
       </div>
 
     </div>    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   </body>
 </html>
