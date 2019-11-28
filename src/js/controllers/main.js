@@ -1,12 +1,24 @@
 import BaseView from "../views/view";
+import BaseModel from "../models/model";
 import { callbackify } from "util";
 
 class MainCtrl {
     constructor() {
         this.view = new BaseView();
+        this.model = new BaseModel();
     }
 
-    init() {}
+    async init() {
+        const currencies = await this.model.fetchData();
+        const arr = [];
+        console.log(currencies.Data);
+        Object.values(currencies.Data).map((coin, index) => {
+            arr.push({ name: coin.CoinName, symbol: coin.Name });
+        });
+        console.log(arr[0]);
+        let price = await this.model.fetchPrice(arr[133].symbol, "USD");
+        console.log(price);
+    }
 }
 
 function selectItem(el, x) {
