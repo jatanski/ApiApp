@@ -11,22 +11,25 @@ class MainCtrl {
         this.currencies;
         this.currenciesAvailable = false; //if false cant filter coins
         this.error = false;
+        this.fetchingData = false;
     }
 
     async init() {
         //grab supported cryptocurriences (not actual currencies though, those are missing RN)
+        this.fetchingData = true;
         this.currencies = await this.model.fetchAllCoinNames();
         if (!this.currencies || this.currencies.length === 0) {
             this.error = true;
             console.error("Unable to fetch supported coins names");
         } else {
             this.currenciesAvailable = true;
-            console.log(this.currencies[0]);
+            console.log(this.currencies);
         }
+        this.fetchingData = false;
 
         //this is how you grab price to display
         if (this.currenciesAvailable) {
-            let price = await this.model.fetchPrice(this.currencies[133].symbol, "USD");
+            let price = await this.model.fetchPrice(this.currencies[1].symbol, "USD");
             console.log(price);
         }
     }
