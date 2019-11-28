@@ -5,44 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Przelicznik walut</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/e5f8165c38.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    <div class="wrapper">
+    <div id="wrapper" class="wrapper">
 
       <div class="menuBar">
-          <div class="menuItem select">Currency Converter</div>
-          <div class="menuItem">Charts Drawer</div>
-          <div class="menuItem">About</div>
+        <!-- <a href="#" class="menuItem select">Currency Converter</a>
+        <a href="#" class="menuItem">Charts Maker</a>
+        <a href="#" class="menuItem">About</a> -->
+        <div class="menuItem select">Currency Converter</div>
+        <div class="menuItem">Charts Maker</div>
+        <div class="menuItem">About</div>
+        <div class="underline"></div>
       </div>
     
-      <div class="content">
-  
+      <div class="content">  
         <div class="box">
-            <formm class="currConverterForm">
-              <label for="amountFrom" class="inputLabel">Amount</label>
-              <input type: "number" id="amountFrom" class="formInput" placeholder="Enter amount to convert" name="" required>
-              <label for="currFrom" class="inputLabel">From</label>
-              <input type: "text" id="currFrom" class="formInput" placeholder="From (start typing)" name="" required>
-              <div class="arrows">↓↑</div>
-              <label for="toInput" class="inputLabel">To</label>
-              <input type: "text" id="toInput" class="formInput" placeholder="To (start typing)" name="" required>
-              <label for="amountTo" class="inputLabel">Amount</label>
-              <input type: "number" id="amountTo" class="formInput" placeholder="Enter amount to convert" name="" required>  
-            </form>
+          <form class="form">
+            <label for="amountFrom" class="inputLabel">Amount</label>
+            <input type: "number" id="amountFrom" class="formInput" placeholder="Enter amount to convert" name="" required>
+            <label for="currFrom" class="inputLabel">From</label>
+            <input type: "text" id="currFrom" class="formInput" placeholder="From (start typing)" name="" required>
+            <div class="arrows">
+              <i class="fas fa-exchange-alt"></i>
+            </div>
+            <label for="currTo" class="inputLabel">To</label>
+            <input type: "text" id="currTo" class="formInput" placeholder="To (start typing)" name="" required>
+            <label for="amountTo" class="inputLabel">Amount</label>
+            <input type: "number" id="amountTo" class="formInput" placeholder="Enter amount to convert" name="" required>  
+          </form>
         </div>
-    
         <div class="box">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda eaque voluptate necessitatibus accusantium magnam omnis recusandae consectetur fugit alias asperiores dolorum mollitia, provident dignissimos, repudiandae reprehenderit corrupti qui sapiente exercitationem?
-
         </div>
-
       </div>
-      
 
+      <div class="content">
+        <div class="box">
+          <form class="form">
+            <label for="currency" class="inputLabel">Currency</label>
+            <input type: "text" id="currency" class="formInput" placeholder="Currency (start typing)" name="" required>
+            <i class="fas fa-sync"></i>
+            <label for="currency" class="inputLabel">Currency</label>
+            <input type: "text" id="currency" class="formInput" placeholder="Currency (start typing)" name="" required>
+            <i class="fas fa-sync" style="visibility: hidden"></i>
+            <label for="dateFrom" class="inputLabel">Start date</label>
+            <input type: "text" id="dateFrom" class="formInput" placeholder="[yyyy][mm][dd]" name="" required>
+            <i class="fas fa-sync" style="visibility: hidden"></i>
+            <label for="dateTo" class="inputLabel">End date</label>
+            <input type: "text" id="dateTo" class="formInput" placeholder="[yyyy][mm][dd]" name="" required>
+            <div class="chartIcon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+          </form>
+        </div>
+        <div class="box">
+            <img class="pic" src="http://www.yen-to-dollar.com/wp-content/uploads/2009/06/usdjpy17.jpg">
+        </div>
+      </div>
 
-    </div>
+      <div class="content">
+        <div class="box">
+          <img class="pic" src="https://coderscamp.edu.pl/assets/img/about.png">
+        </div>
+        <div class="box">
+            Lorem, ipsum dolor sit accusantium magnam omnis recusandae consectetur fugit alias asperiores dolorum mollitia, provident dignissimos.
+        </div>
+      </div>
 
-    
+    </div>    
   </body>
 </html>
