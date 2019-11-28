@@ -1,5 +1,6 @@
 import BaseView from "../views/view";
 import BaseModel from "../models/model";
+import myChart from "../views/chart";
 import { callbackify } from "util";
 
 class MainCtrl {

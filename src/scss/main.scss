@@ -5,7 +5,7 @@ html{
     --main-color: #11172D;  // rgb(18, 20, 165);//granat // rgb(74, 18, 165);//fiolet
     --acc-color: #374C62;   // rgb(63, 61, 168) //rgb(102, 61, 168);
     --text-color: rgba(217, 218, 230, 0.95); //rgb(204, 200, 253); //rgb(221, 200, 253);
-    
+
     background: linear-gradient(120deg, var(--main-color), var(--acc-color), var(--text-color));
     background-image: url('https://kantoronline.pl/blog/wp-content/uploads/2017/10/bitcoin_12.png');
     background-repeat: no-repeat;
@@ -205,7 +205,7 @@ html{
     100%{transform:rotate(270deg);}
 }
 
-.pic{
+.chart{
     width: 100%;
     height: 100%;
     border-radius: 2%;
