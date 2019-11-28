@@ -1,5 +1,9 @@
 class BasicModel {
-  constructor() {}
+    constructor() {}
+
+    async fetchData() {
+        await fetch();
+    }
 }
 
 export default BasicModel;

@@ -1,5 +1,5 @@
 class View {
-  constructor() {}
+    constructor() {}
 }
 
 export default View;
