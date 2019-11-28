@@ -16,13 +16,13 @@ class BaseModel {
             currencies.push({ name: coin.CoinName, symbol: coin.Name });
         });
 
-        //fetch real currencies
+        //fetch real currencies (should be saved in a separate json file, will do that later to improve performance; it "only" takes 15 seconds to load data and makes 100 extra api calls)
         const realCurrencies = await this.fetchRealCurrencies();
         Object.values(realCurrencies).map(currency => {
             currencies.push({ name: currency.name, symbol: currency.code });
         });
 
-        //fetch some more supported crypto
+        //fetch some more supported crypto (should be saved in a separate json file, but thats boring :D)
         const possiblyNewCurrencies = await this.fetchAdditionalCurrencies();
         const additionalCurrencies = [];
         possiblyNewCurrencies.forEach(currency => {
