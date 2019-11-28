@@ -1,11 +1,19 @@
 class BaseModel {
     constructor() {}
 
-    async fetchData() {
+    async fetchAllCoinNames() {
         const response = await fetch("https://min-api.cryptocompare.com/data/all/coinlist");
-        const currency = await response.json();
-        console.log(currency);
-        return currency;
+        const data = await response.json();
+        if (data.Response !== "Success") {
+            return [];
+        }
+
+        const currencies = [];
+        Object.values(data.Data).map((coin, index) => {
+            currencies.push({ name: coin.CoinName, symbol: coin.Name });
+        });
+        console.log(currencies);
+        return currencies;
     }
 
     async fetchPrice(symbol1, symbol2) {

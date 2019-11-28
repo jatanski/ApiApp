@@ -6,18 +6,28 @@ class MainCtrl {
     constructor() {
         this.view = new BaseView();
         this.model = new BaseModel();
+
+        this.currencies;
+        this.currenciesAvailable = false; //if false cant filter coins
+        this.error = false;
     }
 
     async init() {
-        const currencies = await this.model.fetchData();
-        const arr = [];
-        console.log(currencies.Data);
-        Object.values(currencies.Data).map((coin, index) => {
-            arr.push({ name: coin.CoinName, symbol: coin.Name });
-        });
-        console.log(arr[0]);
-        let price = await this.model.fetchPrice(arr[133].symbol, "USD");
-        console.log(price);
+        //grab supported cryptocurriences (not actual currencies though, those are missing RN)
+        this.currencies = await this.model.fetchAllCoinNames();
+        if (!this.currencies || this.currencies.length === 0) {
+            this.error = true;
+            console.error("Unable to fetch supported coins names");
+        } else {
+            this.currenciesAvailable = true;
+            console.log(this.currencies[0]);
+        }
+
+        //this is how you grab price to display
+        if (this.currenciesAvailable) {
+            let price = await this.model.fetchPrice(this.currencies[133].symbol, "USD");
+            console.log(price);
+        }
     }
 }
 
