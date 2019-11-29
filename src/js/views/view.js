@@ -1,3 +1,5 @@
+import BaseModel from "../models/model";
+
 class View {
     constructor() {}
 }

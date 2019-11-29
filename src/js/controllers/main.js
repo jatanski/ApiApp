@@ -33,7 +33,39 @@ class MainCtrl {
             let price = await this.model.fetchPrice(this.currencies[1].symbol, "USD");
             console.log(price);
         }
+
+        this.model.fetchTopTen()
+          .then(response => displayTopTen(response.Data));
+        
+        
     }
+}
+
+function displayTopTen(topTen) {
+  const boxes = document.querySelectorAll(".box");
+  var innerHtml =   `<h5>Top ten cryptocurrencies: </h5>
+                     <table class="topTenTable">
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Price (USD)</th>
+                          <th>Change 24h (%)</th>
+                        </tr>
+                      </thead>`
+  innerHtml += '<tbody>';
+
+  for (let i=0; i<topTen.length; i++){
+    innerHtml += `<td>${topTen[i].CoinInfo.FullName}</td>`;
+    innerHtml += `<td>${topTen[i].DISPLAY.USD.PRICE}</td>`;
+    if(topTen[i].DISPLAY.USD.CHANGEPCT24HOUR>0){
+      innerHtml += `<td><i class="fas fa-long-arrow-alt-up" style="color: green"></i>  ${topTen[i].DISPLAY.USD.CHANGEPCT24HOUR}</td></tr>`;    
+    } else {
+      innerHtml += `<td><i class="fas fa-long-arrow-alt-down" style="color: crimson"></i>  ${topTen[i].DISPLAY.USD.CHANGEPCT24HOUR}</td></tr>`;    
+    }
+  }
+
+  innerHtml += '</tbody></table>';
+  boxes[1].innerHTML = innerHtml;
 }
 
 function selectItem(el, x) {
@@ -67,15 +99,12 @@ menuItems.forEach((el, index) => {
     el.addEventListener("click", () => {
         switch (index) {
             case 0:
-                selectItem(el, "5%");
                 sites[0].scrollIntoView();
                 break;
             case 1:
-                selectItem(el, "37.5%");
                 sites[1].scrollIntoView();
                 break;
             case 2:
-                selectItem(el, "70%");
                 sites[2].scrollIntoView();
                 break;
             default:

@@ -33,6 +33,23 @@ class BaseModel {
             return response[symbol2];
         }
     }
+
+
+
+    async fetchTopTen(){
+        const responseJSON = await fetch(`https://min-api.cryptocompare.com/data/top/totalvolfull?limit=10&tsym=USD`);
+        const response = await responseJSON.json();
+        if (!!response.Response) {
+            console.error("Couldn't fetch Top10");
+            return -1;
+        } else {
+            return response;
+        }
+    }
+
+
+
+
 }
 
 export default BaseModel;
