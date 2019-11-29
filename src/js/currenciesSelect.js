@@ -11,10 +11,7 @@ import additioncalCurrenciesData from "./currencies_data";
             const regex = new RegExp(searched, 'gi');
             return currency.name.match(regex) || currency.symbol.match(regex)
         });
-
     } 
-
-    console.log ("AAAAAAAAAA");
 
     function displayMatches() {
         const matchArray = findMatches(this.value, currencies);
@@ -35,6 +32,5 @@ import additioncalCurrenciesData from "./currencies_data";
     const suggestions = document.querySelectorAll('.suggestions');
     searchInput.addEventListener('change', displayMatches);
     searchInput.addEventListener('keyup', displayMatches);
-
 
     export default displayMatches;

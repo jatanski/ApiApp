@@ -134,6 +134,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 
     text-align: center;
     color: var(--acc-color);
@@ -221,6 +222,16 @@ body {
     }
 }
 
+.topTenTable {
+    width: 100%;
+    height: 90%;
+    font-size: 0.7rem;
+
+    & tr {
+        background: rgba(255, 255, 255, 0.3);
+    }
+}
+
 .fa-sync {
     margin: 15px 10px 0 0;
     transform: rotate(90deg);
@@ -274,6 +285,7 @@ body {
 
 .pic {
     height: 100%;
+    width: 100%;
     object-fit: contain;
     overflow: hidden;
 }
