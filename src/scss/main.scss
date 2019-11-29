@@ -160,10 +160,12 @@ body {
     flex-direction: column;
 
     & .inputLabel {
-        font-size: 1.8rem;
-        align-self: center;
         max-width: 350px;
         width: 100%;
+        align-self: center;
+
+        font-size: 1.8rem;
+        text-align: left;
     }
 
     & .formInput {
@@ -220,9 +222,7 @@ body {
 }
 
 .fa-sync {
-    position: relative;
-    left: 36.5%;
-    top: 2.5%;
+    margin: 15px 10px 0 0;
     transform: rotate(90deg);
     cursor: pointer;
 
