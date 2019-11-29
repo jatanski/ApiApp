@@ -80,11 +80,11 @@ body {
     @media (max-width: $mobile-width) {
         width: 100%;
     }
-}
 
-.menuItem:hover {
-    cursor: pointer;
-    box-shadow: 0px 0px 2rem var(--text-color);
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0px 0px 2rem var(--text-color);
+    }
 }
 
 .select {
@@ -208,15 +208,15 @@ body {
     border-radius: 50%;
     box-shadow: 0px 0px 0.2rem var(--acc-color);
     cursor: pointer;
-}
 
-.arrows:hover {
-    box-shadow: 0px 0px 0.5rem var(--acc-color);
-    animation-name: rotation;
-    animation-duration: 0.2s;
-    animation-timing-function: linear;
-    animation-play-state: running;
-    animation-fill-mode: forwards;
+    &:hover {
+        box-shadow: 0px 0px 0.5rem var(--acc-color);
+        animation-name: rotation;
+        animation-duration: 0.2s;
+        animation-timing-function: linear;
+        animation-play-state: running;
+        animation-fill-mode: forwards;
+    }
 }
 
 .fa-sync {
@@ -225,14 +225,14 @@ body {
     top: 2.5%;
     transform: rotate(90deg);
     cursor: pointer;
-}
 
-.fa-sync:hover {
-    animation-name: rotation;
-    animation-duration: 0.2s;
-    animation-timing-function: linear;
-    animation-play-state: running;
-    animation-fill-mode: forwards;
+    &:hover {
+        animation-name: rotation;
+        animation-duration: 0.2s;
+        animation-timing-function: linear;
+        animation-play-state: running;
+        animation-fill-mode: forwards;
+    }
 }
 
 .chartIcon {
@@ -247,15 +247,15 @@ body {
     border-radius: 50%;
     box-shadow: 0px 0px 0.2rem var(--acc-color);
     cursor: pointer;
+
+    &:hover {
+        box-shadow: 0px 0px 0.5rem var(--acc-color);
+    }
 }
 
 .suggestions {
     list-style-type: none;
     font-size: 0.7rem;
-}
-
-.chartIcon:hover {
-    box-shadow: 0px 0px 0.5rem var(--acc-color);
 }
 
 @keyframes rotation {
