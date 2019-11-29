@@ -47,7 +47,7 @@ function displayTopTen(response) {
         return false;
     }
     const topTen = response.Data;
-    let innerHtml = `<h5>Top ten cryptocurrencies: </h5>
+    let innerHtml = `<h5 class="box__header">Top ten cryptocurrencies: </h5>
                      <table class="topTenTable">
                       <thead>
                         <tr>
