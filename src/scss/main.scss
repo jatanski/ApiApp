@@ -1,30 +1,46 @@
 @import "./test";
 
-html{
-    scroll-behavior: smooth;    
-    --main-color: #11172D;  // rgb(18, 20, 165);//granat // rgb(74, 18, 165);//fiolet
-    --acc-color: #374C62;   // rgb(63, 61, 168) //rgb(102, 61, 168);
+$mobile-width: 650px;
+$mid-width: 1333px;
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    --main-color: #11172d; // rgb(18, 20, 165);//granat // rgb(74, 18, 165);//fiolet
+    --acc-color: #374c62; // rgb(63, 61, 168) //rgb(102, 61, 168);
     --text-color: rgba(217, 218, 230, 0.95); //rgb(204, 200, 253); //rgb(221, 200, 253);
 
     background: linear-gradient(120deg, var(--main-color), var(--acc-color), var(--text-color));
-    background-image: url('https://kantoronline.pl/blog/wp-content/uploads/2017/10/bitcoin_12.png');
+    background-image: url("https://kantoronline.pl/blog/wp-content/uploads/2017/10/bitcoin_12.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
 
     height: 100%;
     width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
-.wrapper{
+body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
     height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
 }
 
-.menuBar{
+.menuBar {
     position: fixed;
     top: 2%;
     left: 0;
@@ -32,19 +48,24 @@ html{
     display: flex;
     justify-content: space-around;
     align-items: center;
+    flex-wrap: wrap;
 
     width: 100%;
     height: 10vh;
 
-    // background: rgba(0,0,0,.5);
+    @media (max-width: $mobile-width) {
+        position: relative;
+        height: fit-content;
+    }
 }
 
-.menuItem{
+.menuItem {
     height: 70%;
     width: 30%;
-    box-shadow: 0px 0px .2rem var(--main-color);   
+    min-width: 200px;
+    box-shadow: 0px 0px 0.2rem var(--main-color);
     border: 0.5px solid var(--text-color);
-    opacity: .8;
+    opacity: 0.8;
     border-radius: 2%;
 
     display: flex;
@@ -53,47 +74,61 @@ html{
 
     font-size: 1.2rem;
     color: var(--text-color);
-    box-shadow: 0px 0px .5rem var(--text-color);   
+    box-shadow: 0px 0px 0.5rem var(--text-color);
     background: rgba(0, 0, 0, 0.25);
+
+    @media (max-width: $mobile-width) {
+        width: 100%;
+    }
 }
 
-.menuItem:hover{
+.menuItem:hover {
     cursor: pointer;
-    box-shadow: 0px 0px 2rem var(--text-color);   
+    box-shadow: 0px 0px 2rem var(--text-color);
 }
 
-.select{
+.select {
     color: var(--acc-color);
     background: var(--text-color);
 }
 
-.underline{
+.underline {
     position: fixed;
     top: 12vh;
     left: 5%; //37.5%; //70%;
     width: 25%;
-    border: white solid .5px;
+    border: white solid 0.5px;
+
+    @media (max-width: $mobile-width) {
+        display: none;
+    }
 }
 
-.content{
-    height: 100vh;
+.content {
+    min-height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    padding-top: 10vh;
+    @media (max-width: $mobile-width) {
+        height: fit-content;
+    }
 }
 
-.box{
-    height: 50%;
+.box {
+    min-height: 65%;
+    max-height: 75vh;
     width: 30%;
-    margin: 10% 5%;
+    margin: 5% 5%;
     padding: 3%;
+    overflow: hidden;
 
     background: var(--text-color);
     border-radius: 2%;
-    box-shadow: 10px 10px .5rem var(--acc-color);
+    box-shadow: 10px 10px 0.5rem var(--acc-color);
     border: 0.5px solid var(--text-color);
 
     display: flex;
@@ -101,74 +136,90 @@ html{
     justify-content: center;
 
     text-align: center;
-    color: var(--acc-color);    
+    color: var(--acc-color);
+    font-size: 1.2rem;
+
+    @media (min-width: $mobile-width) and (max-width: $mid-width) {
+        width: 60%;
+    }
+
+    @media (max-width: $mobile-width) {
+        width: 100%;
+    }
 }
 
-.inputLabel{
-    font-size: .8rem;
-    align-self: flex-start;
-    margin: 0 20%;
-}
-
-.form{
+.form {
     height: 100%;
     width: 100%;
-    opacity: .8;
+    padding: 10px;
+    opacity: 0.8;
 
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
+    & .inputLabel {
+        font-size: 1.8rem;
+        align-self: center;
+        max-width: 350px;
+        width: 100%;
+    }
+
+    & .formInput {
+        max-width: 350px;
+        width: 100%;
+        padding: 10px;
+
+        font-size: 1.2rem;
+        font-weight: bold;
+
+        border-radius: 10px;
+        text-align: center;
+        border: none;
+        background: #fff;
+        opacity: 0.7;
+        box-shadow: 0px 0px 0.2rem var(--acc-color);
+
+        &::placeholder {
+            color: var(--acc-color);
+            font-size: 0.9rem;
+            opacity: 0.5;
+            object-fit: contain;
+        }
+
+        &[type="date"] {
+            font-weight: 400;
+        }
+    }
 }
 
-.formInput{
-    width: 60%;
-    height: 10%;
-
-    font-size: 1.2rem;
-    font-weight: bold;
-
-    border-radius: 10px;
-    text-align: center;
-    border: none;
-    background: #FFF;
-    opacity: .7;
-    box-shadow: 0px 0px .2rem var(--acc-color);   
-}
-
-.formInput::placeholder{
-    color: var(--acc-color);
-    font-size: .6rem;
-    opacity: .5;
-    object-fit: contain;
-}
-
-.arrows{
+.arrows {
     transform: rotate(90deg);
-    font-size: .7rem;
+    font-size: 0.7rem;
 
     font-weight: bold;
     line-height: 3rem;
     margin: 4% auto 0 auto;
 
-    border: solid .5px var(--acc-color);
+    border: solid 0.5px var(--acc-color);
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
-    box-shadow: 0px 0px .2rem var(--acc-color);  
+    box-shadow: 0px 0px 0.2rem var(--acc-color);
     cursor: pointer;
 }
 
-.arrows:hover{
-    box-shadow: 0px 0px .5rem var(--acc-color);   
+.arrows:hover {
+    box-shadow: 0px 0px 0.5rem var(--acc-color);
     animation-name: rotation;
-    animation-duration: .2s;
+    animation-duration: 0.2s;
     animation-timing-function: linear;
     animation-play-state: running;
-    animation-fill-mode: forwards; 
+    animation-fill-mode: forwards;
 }
 
-.fa-sync{
+.fa-sync {
     position: relative;
     left: 36.5%;
     top: 2.5%;
@@ -176,49 +227,52 @@ html{
     cursor: pointer;
 }
 
-.fa-sync:hover{
+.fa-sync:hover {
     animation-name: rotation;
-    animation-duration: .2s;
+    animation-duration: 0.2s;
     animation-timing-function: linear;
     animation-play-state: running;
-    animation-fill-mode: forwards; 
+    animation-fill-mode: forwards;
 }
 
-.chartIcon{    
+.chartIcon {
     font-size: 1rem;
     color: var(--acc-color);
     line-height: 3rem;
     margin: 4% auto 0 auto;
 
-    border: solid .5px var(--acc-color);
+    border: solid 0.5px var(--acc-color);
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
-    box-shadow: 0px 0px .2rem var(--acc-color);  
+    box-shadow: 0px 0px 0.2rem var(--acc-color);
     cursor: pointer;
 }
 
-.suggestions{
+.suggestions {
     list-style-type: none;
     font-size: 0.7rem;
 }
 
-.chartIcon:hover{
-    box-shadow: 0px 0px .5rem var(--acc-color);   
+.chartIcon:hover {
+    box-shadow: 0px 0px 0.5rem var(--acc-color);
 }
 
-@keyframes rotation{
-    0%{}
-    100%{transform:rotate(270deg);}
+@keyframes rotation {
+    0% {
+    }
+    100% {
+        transform: rotate(270deg);
+    }
 }
 
-.chart{
+.chart {
     width: 100%;
     height: 100%;
     border-radius: 2%;
 }
 
-.pic{
+.pic {
     height: 100%;
     object-fit: contain;
     overflow: hidden;
