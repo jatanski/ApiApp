@@ -1,6 +1,7 @@
 import BaseView from "../views/view";
 import BaseModel from "../models/model";
 import myChart from "../views/chart";
+import displayMatches from "../currenciesSelect"
 import { callbackify } from "util";
 
 class MainCtrl {
@@ -43,9 +44,25 @@ function selectItem(el, x) {
     el.classList.add("select");
 }
 
+function getScrollPercent() {
+  var h = document.documentElement, 
+      b = document.body,
+      st = 'scrollTop',
+      sh = 'scrollHeight';
+  return (h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight) * 100;
+}
+
 const underline = document.querySelector(".underline");
 const menuItems = document.querySelectorAll(".menuItem");
 const sites = document.querySelectorAll(".content");
+
+document.addEventListener('scroll', ()=>{
+  let scrollPercent = getScrollPercent();
+  if(scrollPercent<25) selectItem(menuItems[0], (scrollPercent / 1.5384 + 5) + '%');
+  if(scrollPercent>25) selectItem(menuItems[1], (scrollPercent / 1.5384 + 5) + '%');
+  if(scrollPercent>75) selectItem(menuItems[2], (scrollPercent / 1.5384 + 5) + '%');
+})
+
 menuItems.forEach((el, index) => {
     el.addEventListener("click", () => {
         switch (index) {

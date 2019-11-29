@@ -14,6 +14,8 @@ import additioncalCurrenciesData from "./currencies_data";
 
     } 
 
+    console.log ("AAAAAAAAAA");
+
     function displayMatches() {
         const matchArray = findMatches(this.value, currencies);
         const html = matchArray.map(currency => {
@@ -34,3 +36,5 @@ import additioncalCurrenciesData from "./currencies_data";
     searchInput.addEventListener('change', displayMatches);
     searchInput.addEventListener('keyup', displayMatches);
 
+
+    export default displayMatches;
