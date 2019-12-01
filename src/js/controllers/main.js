@@ -25,19 +25,14 @@ class MainCtrl {
             console.error("Unable to fetch supported coins names");
         } else {
             this.currenciesAvailable = true;
-            console.log(this.currencies);
         }
         this.fetchingData = false;
-
-        //this is how you grab price to display
-        if (this.currenciesAvailable) {
-            let price = await this.model.fetchPrice(this.currencies[1].symbol, "USD");
-            console.log(price);
-        }
 
         this.model.fetchTopTen().then(response => displayTopTen(response));
     }
 }
+
+var mainCtrl = new MainCtrl();
 
 function displayTopTen(response) {
     const box = document.querySelector("#top10");
@@ -102,19 +97,26 @@ let currTo = document.querySelector('#currTo');
 let amountFrom = document.querySelector('#amountFrom');
 let amountTo = document.querySelector('#amountTo');
 
-function calculate (e){ //!TODO /przeliczenie waluty
-  if(!currFrom.value || !currTo.value || !amountFrom.value) return; // jesli nie sa uzupelnione potrzebne pola → return
-  let currFromSymbol = currFrom.value[currFrom.value.length-3] + 
-                        currFrom.value[currFrom.value.length-2] + 
-                        currFrom.value[currFrom.value.length-1];
-  let currToSymbol = currTo.value[currTo.value.length-3] + 
-                        currTo.value[currTo.value.length-2] + 
-                        currTo.value[currTo.value.length-1];
-  let money = amountFrom.value;
+async function calculate (e){ //!TODO /przeliczenie waluty
 
+    if(!currFrom.value || !currTo.value || !amountFrom.value) return; // jesli nie sa uzupelnione potrzebne pola → return
+    let currFromSymbol = currFrom.value[currFrom.value.length-3] + 
+                    currFrom.value[currFrom.value.length-2] + 
+                    currFrom.value[currFrom.value.length-1];
+    let currToSymbol = currTo.value[currTo.value.length-3] + 
+                    currTo.value[currTo.value.length-2] + 
+                    currTo.value[currTo.value.length-1];
+    let money = amountFrom.value;
 
   
-  amountTo.value = money * 2;
+    if (1) {
+        let price = await mainCtrl.model.fetchPrice(currFromSymbol, currToSymbol);
+        console.log(price);
+        amountTo.value = money * price; 
+    }else{
+        amountTo.value = "Cannot download currencies data. Check your internet connection."
+    }
+  
 
 
 }
