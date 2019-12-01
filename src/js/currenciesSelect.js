@@ -23,7 +23,7 @@ import additioncalCurrenciesData from "./currencies_data";
                     ${el.name}, ${el.symbol}
                 </li>`
         });
-        suggestions[i].innerHTML = innerHtml;
+        suggestions[i].innerHTML = innerHtml.join("");
     }
 
     const suggestions = document.querySelectorAll('.suggestions');

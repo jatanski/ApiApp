@@ -93,61 +93,9 @@ const underline = document.querySelector(".underline");
 const menuItems = document.querySelectorAll(".menuItem");
 const sites = document.querySelectorAll(".content");
 const currencyInputs = document.querySelectorAll('.currencyInput');
-<<<<<<< HEAD
 const arrowsButton = document.querySelector('.arrows');
 const chartArrowsButton = document.querySelector('.fa-sync');
 const forms = document.querySelectorAll('form');
-=======
-
-const arrowsButton = document.querySelector('.arrows');
-const chartArrowsButton = document.querySelector('.fa-sync');
-const forms = document.querySelectorAll('form');
-
-let currFrom = document.querySelector('#currFrom');
-let currTo = document.querySelector('#currTo');
-let amountFrom = document.querySelector('#amountFrom');
-let amountTo = document.querySelector('#amountTo');
-
-function calculate (e) { //!TODO /przeliczenie waluty
-  if (!currFrom.value || !currTo.value || !amountFrom.value) return; // jesli nie sa uzupelnione potrzebne pola → return
-  let currFromSymbol = currFrom.value[currFrom.value.length-3] + 
-                        currFrom.value[currFrom.value.length-2] + 
-                        currFrom.value[currFrom.value.length-1];
-  let currToSymbol = currTo.value[currTo.value.length-3] + 
-                        currTo.value[currTo.value.length-2] + 
-                        currTo.value[currTo.value.length-1];
-  let money = amountFrom.value;
-  amountTo.value = money * 2;}
-amountFrom.addEventListener('input', calculate);
-amountTo.addEventListener('input', calculate);
-
-arrowsButton.addEventListener('click', e => {
-  let temp = currencyInputs[0].value;
-  currencyInputs[0].value = currencyInputs[1].value;
-  currencyInputs[1].value = temp;
-  calculate();
-});
-
-chartArrowsButton.addEventListener('click', e => {
-  let temp = currencyInputs[2].value;
-  currencyInputs[2].value = currencyInputs[3].value;
-  currencyInputs[3].value = temp;
-});
-
-currencyInputs.forEach((currInp, index) => currInp.addEventListener('input', (e) => {
-  displayMatches(e.target.value, index);
-}));
-
-document.addEventListener('click', (e) => {
-    if(e.target && e.target.classList.contains("listItem")) {
-      e.target.parentNode.parentNode.previousElementSibling.value = e.target.innerText;
-      document.querySelectorAll('.suggestions').forEach((el)=>{
-        el.innerHTML = "";
-      });      
-      calculate();
-    }
-});
->>>>>>> 1c6ec7a251a5fb238d99350ef1681c0b6c9170c6
 
 let currFrom = document.querySelector('#currFrom');
 let currTo = document.querySelector('#currTo');
