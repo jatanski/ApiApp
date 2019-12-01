@@ -109,7 +109,7 @@ async function calculate (){
     let money = amountFrom.value;
 
     let price = await mainCtrl.model.fetchPrice(currFromSymbol, currToSymbol);
-    if (price !== -1) {
+    if (price) {
         amountTo.value = money * price; 
     }else{
         console.error("Cannot download currencies data.");
