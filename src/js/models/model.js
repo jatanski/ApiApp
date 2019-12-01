@@ -28,7 +28,7 @@ class BaseModel {
         const response = await responseJSON.json();
         if (!!response.Response) {
             console.error("Couldn't fetch price");
-            return -1;
+            return;
         } else {
             return response[symbol2];
         }
