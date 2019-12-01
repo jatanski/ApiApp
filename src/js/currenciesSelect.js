@@ -3,6 +3,7 @@ import additioncalCurrenciesData from "./currencies_data";
     const currencies = additioncalCurrenciesData;
 
     function findMatches(searched, currencies) {
+
         return currencies.filter(currency => {
             const regex = new RegExp(searched, 'gi');
             return currency.name.match(regex) || currency.symbol.match(regex)
@@ -22,7 +23,7 @@ import additioncalCurrenciesData from "./currencies_data";
                     ${el.name}, ${el.symbol}
                 </li>`
         });
-        suggestions[i].innerHTML = innerHtml;
+        suggestions[i].innerHTML = innerHtml.join("");
     }
 
     const suggestions = document.querySelectorAll('.suggestions');

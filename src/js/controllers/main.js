@@ -93,7 +93,6 @@ const underline = document.querySelector(".underline");
 const menuItems = document.querySelectorAll(".menuItem");
 const sites = document.querySelectorAll(".content");
 const currencyInputs = document.querySelectorAll('.currencyInput');
-
 const arrowsButton = document.querySelector('.arrows');
 const chartArrowsButton = document.querySelector('.fa-sync');
 const forms = document.querySelectorAll('form');
@@ -103,8 +102,8 @@ let currTo = document.querySelector('#currTo');
 let amountFrom = document.querySelector('#amountFrom');
 let amountTo = document.querySelector('#amountTo');
 
-function calculate (e) { //!TODO /przeliczenie waluty
-  if (!currFrom.value || !currTo.value || !amountFrom.value) return; // jesli nie sa uzupelnione potrzebne pola → return
+function calculate (e){ //!TODO /przeliczenie waluty
+  if(!currFrom.value || !currTo.value || !amountFrom.value) return; // jesli nie sa uzupelnione potrzebne pola → return
   let currFromSymbol = currFrom.value[currFrom.value.length-3] + 
                         currFrom.value[currFrom.value.length-2] + 
                         currFrom.value[currFrom.value.length-1];
@@ -112,7 +111,14 @@ function calculate (e) { //!TODO /przeliczenie waluty
                         currTo.value[currTo.value.length-2] + 
                         currTo.value[currTo.value.length-1];
   let money = amountFrom.value;
-  amountTo.value = money * 2;}
+
+
+  
+  amountTo.value = money * 2;
+
+
+}
+
 amountFrom.addEventListener('input', calculate);
 amountTo.addEventListener('input', calculate);
 
@@ -143,11 +149,11 @@ document.addEventListener('click', (e) => {
     }
 });
 
-document.addEventListener("scroll", () => {
-    let scrollPercent = getScrollPercent();
-    if (scrollPercent < 25) selectItem(menuItems[0], scrollPercent / 1.5384 + 5 + "%");
-    if (scrollPercent > 25) selectItem(menuItems[1], scrollPercent / 1.5384 + 5 + "%");
-    if (scrollPercent > 75) selectItem(menuItems[2], scrollPercent / 1.5384 + 5 + "%");
+document.addEventListener('scroll', ()=>{
+  let scrollPercent = getScrollPercent();
+  if(scrollPercent<25) selectItem(menuItems[0], (scrollPercent / 1.5384 + 5) + '%');
+  if(scrollPercent>25) selectItem(menuItems[1], (scrollPercent / 1.5384 + 5) + '%');
+  if(scrollPercent>75) selectItem(menuItems[2], (scrollPercent / 1.5384 + 5) + '%');
 });
 
 menuItems.forEach((el, index) => {

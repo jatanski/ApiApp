@@ -65,7 +65,6 @@ var myChart = new Chart(ctx, {
                     tooltipEl.id = 'chartjs-tooltip';
                     tooltipEl.style.background = 'rgba(0,0,0,.55)';
                     tooltipEl.style.color = 'rgb(255,255,255)';
-                    // tooltipEl.style.fontWeight = '550';
                     tooltipEl.style.borderRadius = '5px';
                     tooltipEl.style.border = '1px solid black';
                     tooltipEl.innerHTML = '<table></table>';
