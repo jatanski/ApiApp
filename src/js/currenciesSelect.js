@@ -1,10 +1,6 @@
 import additioncalCurrenciesData from "./currencies_data";
 
-    const currencies = [];
-
-    fetch(additioncalCurrenciesData)
-        .then(dot => dot.json())
-        .then(data => currencies.push(...data))
+    const currencies = additioncalCurrenciesData;
 
     function findMatches(searched, currencies) {
         return currencies.filter(currency => {
@@ -13,24 +9,22 @@ import additioncalCurrenciesData from "./currencies_data";
         });
     } 
 
-    function displayMatches() {
-        const matchArray = findMatches(this.value, currencies);
-        const html = matchArray.map(currency => {
-            const regex = new RegExp(this.value, 'gi');
-            const currencyName = currency.name.replace(regex, `<span class="h1">${this.value}</span>`);
-            const currencySymbol = currency.symbol.replace(regex, `<span class="h1">${this.value}</span>`);
+    function displayMatches(val, i) {
+        if (val.length<1) {
+            suggestions[i].innerHTML = [];
+            return;
+        }
+        const matchArray = findMatches(val, currencies);
+        var innerHtml = matchArray.map((el, index) => {
+            if(index>=10) return null;
             return `
-            <li>
-                <span class="name">${currencyName}, ${currencySymbol}</span>
-            </li>
-            `;
+                <li class="listItem">
+                    ${el.name}, ${el.symbol}
+                </li>`
         });
-        suggestions.innerHTML = html;
+        suggestions[i].innerHTML = innerHtml;
     }
 
-    const searchInput = document.getElementById('currFrom');
     const suggestions = document.querySelectorAll('.suggestions');
-    searchInput.addEventListener('change', displayMatches);
-    searchInput.addEventListener('keyup', displayMatches);
 
     export default displayMatches;
