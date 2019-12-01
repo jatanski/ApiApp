@@ -1,7 +1,7 @@
 import BaseView from "../views/view";
 import BaseModel from "../models/model";
 import myChart from "../views/chart";
-import displayMatches from "../currenciesSelect"
+import displayMatches from "../currenciesSelect";
 import { callbackify } from "util";
 import { format } from "path";
 
@@ -35,16 +35,20 @@ class MainCtrl {
             console.log(price);
         }
 
-        this.model.fetchTopTen()
-          .then(response => displayTopTen(response.Data));
-        
-        
+        this.model.fetchTopTen().then(response => displayTopTen(response));
     }
 }
 
-function displayTopTen(topTen) {
-  const boxes = document.querySelectorAll(".box");
-  var innerHtml =   `<h5>Top ten cryptocurrencies: </h5>
+function displayTopTen(response) {
+    const box = document.querySelector("#top10");
+    console.log(response.Data, !response.Data);
+    if (!response.Data) {
+        const innerHtml = "Couldn't fetch top 10 cryptocurrencies";
+        box.innerHTML = innerHtml;
+        return false;
+    }
+    const topTen = response.Data;
+    let innerHtml = `<h5 class="box__header">Top ten cryptocurrencies: </h5>
                      <table class="topTenTable">
                       <thead>
                         <tr>
@@ -52,21 +56,21 @@ function displayTopTen(topTen) {
                           <th>Price (USD)</th>
                           <th>Change 24h (%)</th>
                         </tr>
-                      </thead>`
-  innerHtml += '<tbody>';
+                      </thead>`;
+    innerHtml += "<tbody>";
 
-  for (let i=0; i<topTen.length; i++){
-    innerHtml += `<td>${topTen[i].CoinInfo.FullName}</td>`;
-    innerHtml += `<td>${topTen[i].DISPLAY.USD.PRICE}</td>`;
-    if(topTen[i].DISPLAY.USD.CHANGEPCT24HOUR>0){
-      innerHtml += `<td><i class="fas fa-long-arrow-alt-up" style="color: green"></i>  ${topTen[i].DISPLAY.USD.CHANGEPCT24HOUR}</td></tr>`;    
-    } else {
-      innerHtml += `<td><i class="fas fa-long-arrow-alt-down" style="color: crimson"></i>  ${topTen[i].DISPLAY.USD.CHANGEPCT24HOUR}</td></tr>`;    
+    for (let i = 0; i < topTen.length; i++) {
+        innerHtml += `<td>${topTen[i].CoinInfo.FullName}</td>`;
+        innerHtml += `<td>${topTen[i].DISPLAY.USD.PRICE}</td>`;
+        if (topTen[i].DISPLAY.USD.CHANGEPCT24HOUR > 0) {
+            innerHtml += `<td><i class="fas fa-long-arrow-alt-up" style="color: green"></i>  ${topTen[i].DISPLAY.USD.CHANGEPCT24HOUR}</td></tr>`;
+        } else {
+            innerHtml += `<td><i class="fas fa-long-arrow-alt-down" style="color: crimson"></i>  ${topTen[i].DISPLAY.USD.CHANGEPCT24HOUR}</td></tr>`;
+        }
     }
-  }
 
-  innerHtml += '</tbody></table>';
-  boxes[1].innerHTML = innerHtml;
+    innerHtml += "</tbody></table>";
+    box.innerHTML = innerHtml;
 }
 
 function selectItem(el, x) {
@@ -78,11 +82,11 @@ function selectItem(el, x) {
 }
 
 function getScrollPercent() {
-  var h = document.documentElement, 
-      b = document.body,
-      st = 'scrollTop',
-      sh = 'scrollHeight';
-  return (h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight) * 100;
+    var h = document.documentElement,
+        b = document.body,
+        st = "scrollTop",
+        sh = "scrollHeight";
+    return ((h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight)) * 100;
 }
 
 const underline = document.querySelector(".underline");
