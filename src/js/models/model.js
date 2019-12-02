@@ -18,7 +18,6 @@ class BaseModel {
         });
 
         //add currencies from file
-        console.log(additioncalCurrenciesData, additioncalCurrenciesData && additioncalCurrenciesData.length);
         currencies.push(...additioncalCurrenciesData);
 
         return currencies;
