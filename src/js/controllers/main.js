@@ -26,7 +26,7 @@ class MainCtrl {
             console.error("Unable to fetch supported coins names");
         } else {
             this.currenciesAvailable = true;
-            this.currencies.forEach((el)=>{
+            this.currencies.forEach(el => {
                 currData.push(el);
             });
         }
@@ -90,67 +90,68 @@ function getScrollPercent() {
 const underline = document.querySelector(".underline");
 const menuItems = document.querySelectorAll(".menuItem");
 const sites = document.querySelectorAll(".content");
-const currencyInputs = document.querySelectorAll('.currencyInput');
-const arrowsButton = document.querySelector('.arrows');
-const chartArrowsButton = document.querySelector('.fa-sync');
-const forms = document.querySelectorAll('form');
+const currencyInputs = document.querySelectorAll(".currencyInput");
+const arrowsButton = document.querySelector(".arrows");
+const chartArrowsButton = document.querySelector(".fa-sync");
+const forms = document.querySelectorAll("form");
 
-let currFrom = document.querySelector('#currFrom');
-let currTo = document.querySelector('#currTo');
-let amountFrom = document.querySelector('#amountFrom');
-let amountTo = document.querySelector('#amountTo');
+let currFrom = document.querySelector("#currFrom");
+let currTo = document.querySelector("#currTo");
+let amountFrom = document.querySelector("#amountFrom");
+let amountTo = document.querySelector("#amountTo");
 
-async function calculate (){
+async function calculate() {
+    if (!currFrom.value || !currTo.value || !amountFrom.value) return; // jesli nie sa uzupelnione potrzebne pola → return
 
-    if(!currFrom.value || !currTo.value || !amountFrom.value) return; // jesli nie sa uzupelnione potrzebne pola → return
-
-    let currFromSymbol = currFrom.value.split(',')[1].trim();
-    let currToSymbol = currTo.value.split(',')[1].trim();
+    let currFromSymbol = currFrom.value.split(",")[1].trim();
+    let currToSymbol = currTo.value.split(",")[1].trim();
     let money = amountFrom.value;
 
     let price = await mainCtrl.model.fetchPrice(currFromSymbol, currToSymbol);
     if (price) {
-        amountTo.value = money * price; 
-    }else{
+        amountTo.value = money * price;
+    } else {
         console.error("Cannot download currencies data.");
     }
 }
 
-amountFrom.addEventListener('input', calculate);
-amountTo.addEventListener('input', calculate);
+amountFrom.addEventListener("input", calculate);
+amountTo.addEventListener("input", calculate);
 
-arrowsButton.addEventListener('click', e => {
-  let temp = currencyInputs[0].value;
-  currencyInputs[0].value = currencyInputs[1].value;
-  currencyInputs[1].value = temp;
-  calculate();
+arrowsButton.addEventListener("click", e => {
+    let temp = currencyInputs[0].value;
+    currencyInputs[0].value = currencyInputs[1].value;
+    currencyInputs[1].value = temp;
+    calculate();
 });
 
-chartArrowsButton.addEventListener('click', e => {
-  let temp = currencyInputs[2].value;
-  currencyInputs[2].value = currencyInputs[3].value;
-  currencyInputs[3].value = temp;
+chartArrowsButton.addEventListener("click", e => {
+    let temp = currencyInputs[2].value;
+    currencyInputs[2].value = currencyInputs[3].value;
+    currencyInputs[3].value = temp;
 });
 
-currencyInputs.forEach((currInp, index) => currInp.addEventListener('input', (e) => {
-  displayMatches(e.target.value, index);
-}));
+currencyInputs.forEach((currInp, index) =>
+    currInp.addEventListener("input", e => {
+        displayMatches(e.target.value, index);
+    })
+);
 
-document.addEventListener('click', (e) => {
-    if(e.target && e.target.classList.contains("listItem")) {
-      e.target.parentNode.parentNode.previousElementSibling.value = e.target.innerText;
-      document.querySelectorAll('.suggestions').forEach((el)=>{
-        el.innerHTML = "";
-      });      
-      calculate();
+document.addEventListener("click", e => {
+    if (e.target && e.target.classList.contains("listItem")) {
+        e.target.parentNode.parentNode.previousElementSibling.value = e.target.innerText;
+        document.querySelectorAll(".suggestions").forEach(el => {
+            el.innerHTML = "";
+        });
+        calculate();
     }
 });
 
-document.addEventListener('scroll', ()=>{
-  let scrollPercent = getScrollPercent();
-  if(scrollPercent<25) selectItem(menuItems[0], (scrollPercent / 1.5384 + 5) + '%');
-  if(scrollPercent>25) selectItem(menuItems[1], (scrollPercent / 1.5384 + 5) + '%');
-  if(scrollPercent>75) selectItem(menuItems[2], (scrollPercent / 1.5384 + 5) + '%');
+document.addEventListener("scroll", () => {
+    let scrollPercent = getScrollPercent();
+    if (scrollPercent < 25) selectItem(menuItems[0], scrollPercent / 1.5384 + 5 + "%");
+    if (scrollPercent > 25) selectItem(menuItems[1], scrollPercent / 1.5384 + 5 + "%");
+    if (scrollPercent > 75) selectItem(menuItems[2], scrollPercent / 1.5384 + 5 + "%");
 });
 
 menuItems.forEach((el, index) => {
