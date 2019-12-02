@@ -17,7 +17,7 @@ import additioncalCurrenciesData from "./currencies_data";
         }
         const matchArray = findMatches(val, currencies);
         var innerHtml = matchArray.map((el, index) => {
-            if(index>=10) return null;
+            if(index>=15) return null;
             return `
                 <li class="listItem">
                     ${el.name}, ${el.symbol}
