@@ -1,16 +1,17 @@
 var Chart = require('chart.js');
 
+
 var ctx = document.getElementById('chart').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
+            // BTC / Dolar      //tymczasowe sztywne dane
+        open: [3693, 3825, 3890, 3785, 3822, 3795, 4040],
+        close: [3823, 3885, 3787, 3817, 3791, 4040, 4005],
+        high: [3845, 3918, 3893, 3850, 3887, 4090, 4070],
+        low: [3629, 3770, 3760, 3732, 3780, 3753, 3964],
 
-        open: [],
-        close: [],
-        high: [],
-        low: [],
         labels: ['1.01', '2.01', '3.01', '4.01', '5.01', '6.01', '7.01'],
-
         datasets: [{
             label: 'open',
             data: [],
@@ -19,7 +20,7 @@ var myChart = new Chart(ctx, {
             borderWidth: 1
         }, {    
             label: 'close',
-            data: [],
+            data: [3823, 3885, 3787, 3817, 3791, 4040, 4005],
             order: 1,
             backgroundColor: 'rgba(0, 0, 0, 0)',
         }, {    
@@ -129,75 +130,37 @@ var myChart = new Chart(ctx, {
     }
 });
 
-function generateLabels(from, to){ //MM:DD:YYYY
-    let date1 = Date.parse(from); //od
-    let date2 = Date.parse(to); //do
-    let labels = [];
-
-    if(!Number.isInteger(date1) || !Number.isInteger(date2)){
-        console.error(new Error("Invalid date format"));
-        return;
-    }
-    
-    for (let i = date1; i<=date2; i+=86400000){
-        let day = new Date(new Date(i).toISOString()).getDate();
-        let month = new Date(new Date(i).toISOString()).getMonth();
-        labels.push(day+'.'+(month+1));
-    }
-    return labels;
-}
-
- function updateChart(obj){
-
     //ustawienie początku rysowania osi Y od najmniejszego kursu zaokrąglonego do setek
-    myChart.options.scales.yAxes[0].ticks.min = Math.round(Math.min(...obj.low)/100)*100;
-    
-    myChart.data.open = Array.from(obj.open);
-    myChart.data.datasets[1].data = myChart.data.close = Array.from(obj.close);
-    myChart.data.high = Array.from(obj.high);
-    myChart.data.low = Array.from(obj.low);
-    myChart.data.datasets[0].backgroundColor = [];
-    
-    console.log(myChart.data.datasets[1].data); //////////z tym cos problem
+myChart.options.scales.yAxes[0].ticks.min = Math.round(Math.min(...myChart.data.low)/100)*100;
 
-    obj.open.forEach((element, index) => {
-        //generowanie danych przez obliczanie roznicy otwarcia/zamknięcia        
-        var odds = obj.close[index]
-                    -  obj.open[index];
+myChart.data.datasets[0].data = [];
+myChart.data.datasets[0].backgroundColor = [];
+myChart.data.open.forEach((element, index) => {
+    //generowanie danych przez obliczanie roznicy otwarcia/zamknięcia        
+    var odds = myChart.data.close[index]
+                -  myChart.data.open[index];
 
-        if(odds<0){ //kurs otwarcia > kurs zamknięcia //czerw
-            myChart.data.datasets[0].data.push(Math.abs(odds));
-            myChart.data.datasets[2].data.push(obj.high[index]-obj.open[index]);
-            myChart.data.datasets[3].data.push(obj.close[index]-obj.low[index]);
-            myChart.data.datasets[1].data[index] -= myChart.data.datasets[3].data[index];
-        }
-        else{ //kurs otwarcia < kurs zamknięcia //ziel
-            myChart.data.datasets[0].data.push(Math.abs(odds));
-            myChart.data.datasets[1].data[index] -= Math.abs(odds);
-            myChart.data.datasets[2].data.push(obj.high[index]-obj.close[index]);
-            myChart.data.datasets[3].data.push(obj.open[index]-obj.low[index]);
-            myChart.data.datasets[1].data[index] -= myChart.data.datasets[3].data[index];
-        }
-    
-        if(odds<0){ //kurs otwarcia > kurs zamknięcia ? ustaw kolor czerwony
-                myChart.data.datasets[0].backgroundColor.push("rgba(191, 33, 47, 0.95)");
-            }
-        else{ //kurs otwarcia < kurs zamknięcia ? ustaw kolor zielony
-                myChart.data.datasets[0].backgroundColor.push("rgba(0, 111, 60, 0.95)");
-        }
-    });
-    myChart.update();
- }
-
-    let object = {
-        open: [3693, 3825, 3890, 3785, 3822, 3795, 4040],
-        close: [3823, 3885, 3787, 3817, 3791, 4040, 4005],
-        high: [3845, 3918, 3893, 3850, 3887, 4090, 4070],
-        low: [3629, 3770, 3760, 3732, 3780, 3753, 3964],
-        labels: ['1.01', '2.01', '3.01', '4.01', '5.01', '6.01', '7.01'],
+    if(odds<0){ //kurs otwarcia > kurs zamknięcia //czerw
+        myChart.data.datasets[0].data.push(Math.abs(odds));
+        myChart.data.datasets[2].data.push(myChart.data.high[index]-myChart.data.open[index]);
+        myChart.data.datasets[3].data.push(myChart.data.close[index]-myChart.data.low[index]);
+        myChart.data.datasets[1].data[index] -= myChart.data.datasets[3].data[index];
+    }
+    else{ //kurs otwarcia < kurs zamknięcia //ziel
+        myChart.data.datasets[0].data.push(Math.abs(odds));
+        myChart.data.datasets[1].data[index] -= Math.abs(odds);
+        myChart.data.datasets[2].data.push(myChart.data.high[index]-myChart.data.close[index]);
+        myChart.data.datasets[3].data.push(myChart.data.open[index]-myChart.data.low[index]);
+        myChart.data.datasets[1].data[index] -= myChart.data.datasets[3].data[index];
     }
 
-    updateChart(object);
-
+    if(odds<0){ //kurs otwarcia > kurs zamknięcia ? ustaw kolor czerwony
+            myChart.data.datasets[0].backgroundColor.push("rgba(191, 33, 47, 0.95)");
+        }
+    else{ //kurs otwarcia < kurs zamknięcia ? ustaw kolor zielony
+            myChart.data.datasets[0].backgroundColor.push("rgba(0, 111, 60, 0.95)");
+    }
+});
+myChart.update();
 
 export default myChart;

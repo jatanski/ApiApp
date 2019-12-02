@@ -2,7 +2,6 @@ import BaseView from "../views/view";
 import BaseModel from "../models/model";
 import myChart from "../views/chart";
 import displayMatches from "../currenciesSelect";
-import currData from "../currencies_data";
 import { callbackify } from "util";
 import { format } from "path";
 
@@ -26,9 +25,6 @@ class MainCtrl {
             console.error("Unable to fetch supported coins names");
         } else {
             this.currenciesAvailable = true;
-            this.currencies.forEach((el)=>{
-                currData.push(el);
-            });
         }
         this.fetchingData = false;
 
@@ -40,6 +36,7 @@ var mainCtrl = new MainCtrl();
 
 function displayTopTen(response) {
     const box = document.querySelector("#top10");
+    console.log(response.Data, !response.Data);
     if (!response.Data) {
         const innerHtml = "Couldn't fetch top 10 cryptocurrencies";
         box.innerHTML = innerHtml;
@@ -100,20 +97,28 @@ let currTo = document.querySelector('#currTo');
 let amountFrom = document.querySelector('#amountFrom');
 let amountTo = document.querySelector('#amountTo');
 
-async function calculate (){
+async function calculate (e){ //!TODO /przeliczenie waluty
 
     if(!currFrom.value || !currTo.value || !amountFrom.value) return; // jesli nie sa uzupelnione potrzebne pola → return
-
-    let currFromSymbol = currFrom.value.split(',')[1].trim();
-    let currToSymbol = currTo.value.split(',')[1].trim();
+    let currFromSymbol = currFrom.value[currFrom.value.length-3] + 
+                    currFrom.value[currFrom.value.length-2] + 
+                    currFrom.value[currFrom.value.length-1];
+    let currToSymbol = currTo.value[currTo.value.length-3] + 
+                    currTo.value[currTo.value.length-2] + 
+                    currTo.value[currTo.value.length-1];
     let money = amountFrom.value;
 
-    let price = await mainCtrl.model.fetchPrice(currFromSymbol, currToSymbol);
-    if (price) {
+  
+    if (1) {
+        let price = await mainCtrl.model.fetchPrice(currFromSymbol, currToSymbol);
+        console.log(price);
         amountTo.value = money * price; 
     }else{
-        console.error("Cannot download currencies data.");
+        amountTo.value = "Cannot download currencies data. Check your internet connection."
     }
+  
+
+
 }
 
 amountFrom.addEventListener('input', calculate);
