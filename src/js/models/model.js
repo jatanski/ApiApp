@@ -44,6 +44,17 @@ class BaseModel {
             return response;
         }
     }
+
+    async getHistoricalData(symbol1, symbol2, limit) {
+        const response = await fetch(`https://min-api.cryptocompare.com/data/v2/histoday?fsym=${symbol1}&tsym=${symbol2}&limit=${limit}`);
+        const data = await response.json();
+        if (!!data && data.Response !== "Success") {
+            console.error("Couldn't get the data");
+            return;
+        } else {
+            return data.Data.Data;
+        }
+    }
 }
 
 export default BaseModel;
