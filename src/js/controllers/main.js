@@ -5,12 +5,13 @@ import displayMatches from "../currenciesSelect";
 import currData from "../currencies_data";
 import { callbackify } from "util";
 import { format } from "path";
+import { generateLabels } from "../views/chart";
+import { updateChart } from "../views/chart";
 
 class MainCtrl {
     constructor() {
         this.view = new BaseView();
         this.model = new BaseModel();
-
         this.currencies;
         this.currenciesAvailable = false; //if false cant filter coins
         this.error = false;
@@ -31,7 +32,6 @@ class MainCtrl {
             });
         }
         this.fetchingData = false;
-
         this.model.fetchTopTen().then(response => displayTopTen(response));
     }
 }
@@ -70,6 +70,7 @@ function displayTopTen(response) {
     innerHtml += "</tbody></table>";
     box.innerHTML = innerHtml;
 }
+
 
 function selectItem(el, x) {
     underline.style.left = x;
@@ -153,6 +154,54 @@ document.addEventListener("scroll", () => {
     if (scrollPercent > 25) selectItem(menuItems[1], scrollPercent / 1.5384 + 5 + "%");
     if (scrollPercent > 75) selectItem(menuItems[2], scrollPercent / 1.5384 + 5 + "%");
 });
+
+const chartButton = document.querySelector('.chartIcon');
+const currencyFrom = document.querySelector('.currencyFrom');
+const currencyTo = document.querySelector('.currencyTo');
+const dateFrom = document.querySelector('#dateFrom');
+const dateTo = document.querySelector('#dateTo');
+
+chartButton.addEventListener('click', () => {
+    if (!currencyFrom.value || !currencyTo.value || !dateFrom.value || !dateTo.value) {
+        alert('Please fill all required fields');
+        return;
+    }
+    let currFromSymbol = currencyFrom.value.split(",")[1].trim();
+    let currToSymbol = currencyTo.value.split(",")[1].trim();
+    let todayDate = new Date();
+    let adjustedDateFrom = new Date(dateFrom.value);
+    let adjustedDateTo =new Date(dateTo.value);
+    let limit = Math.floor((todayDate.getTime() - adjustedDateFrom.getTime())/86400000);
+    let daysFromEndDate = Math.floor((todayDate.getTime() - adjustedDateTo.getTime())/86400000);
+    mainCtrl.model.getHistoricalData(currFromSymbol, currToSymbol, limit).then(response => {
+        response.splice(response.length-1-daysFromEndDate, daysFromEndDate);
+        let open = [];
+        response.forEach(el => open.push(el.open));
+        let close = [];
+        response.forEach(el => close.push(el.close));
+        let high = [];
+        response.forEach(el => high.push(el.high));
+        let low = [];
+        response.forEach(el => low.push(el.low));
+        let object = {
+            open: open,
+            close: close,
+            high: high,
+            low: low,
+            labels: generateLabels(Date.parse(adjustedDateFrom), Date.parse(adjustedDateTo))
+        }
+        updateChart(object);
+        console.log(object);
+    });
+})
+
+// let object = {
+//     open: [3693, 3825, 3890, 3785, 3822, 3795, 4040],
+//     close: [3823, 3885, 3787, 3817, 3791, 4040, 4005],
+//     high: [3845, 3918, 3893, 3850, 3887, 4090, 4070],
+//     low: [3629, 3770, 3760, 3732, 3780, 3753, 3964],
+//     labels: ["1.01", "2.01", "3.01", "4.01", "5.01", "6.01", "7.01"]
+//  };
 
 menuItems.forEach((el, index) => {
     el.addEventListener("click", () => {

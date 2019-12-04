@@ -137,10 +137,10 @@ var myChart = new Chart(ctx, {
     }
 });
 
-function generateLabels(from, to) {
+function generateLabels(date1, date2) {
     //MM:DD:YYYY
-    let date1 = Date.parse(from); //od
-    let date2 = Date.parse(to); //do
+    // let date1 = Date.parse(from); //od
+    // let date2 = Date.parse(to); //do
     let labels = [];
 
     if (!Number.isInteger(date1) || !Number.isInteger(date2)) {
@@ -209,3 +209,5 @@ let object = {
 updateChart(object);
 
 export default myChart;
+export {generateLabels};
+export {updateChart};
