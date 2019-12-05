@@ -8,7 +8,7 @@ var myChart = new Chart(ctx, {
         close: [],
         high: [],
         low: [],
-        labels: ["1.01", "2.01", "3.01", "4.01", "5.01", "6.01", "7.01"],
+        labels: [],
 
         datasets: [
             {
@@ -138,9 +138,6 @@ var myChart = new Chart(ctx, {
 });
 
 function generateLabels(date1, date2) {
-    //MM:DD:YYYY
-    // let date1 = Date.parse(from); //od
-    // let date2 = Date.parse(to); //do
     let labels = [];
 
     if (!Number.isInteger(date1) || !Number.isInteger(date2)) {
@@ -157,16 +154,22 @@ function generateLabels(date1, date2) {
 }
 
 function updateChart(obj) {
-    //ustawienie początku rysowania osi Y od najmniejszego kursu zaokrąglonego do setek
-    myChart.options.scales.yAxes[0].ticks.min = Math.round(Math.min(...obj.low) / 100) * 100;
+
+    //ustawienie początku rysowania osi Y od zaokrąglonego najmniejszego kursu
+    let temp =  Math.floor(Math.min(...obj.low));
+    if(temp > 1000) myChart.options.scales.yAxes[0].ticks.min = Math.floor(Math.min(...obj.low) / 1000) * 1000;
+    if(temp > 100 && temp < 1000) myChart.options.scales.yAxes[0].ticks.min = Math.floor(Math.min(...obj.low) / 100) * 100;
+    if(temp > 10 && temp < 100) myChart.options.scales.yAxes[0].ticks.min = Math.floor(Math.min(...obj.low) / 10) * 10;
+    if(temp < 10) myChart.options.scales.yAxes[0].ticks.min = Math.floor(Math.min(...obj.low));
 
     myChart.data.open = Array.from(obj.open);
-    myChart.data.datasets[1].data = myChart.data.close = Array.from(obj.close);
+    myChart.data.datasets[1].data = Array.from(obj.close);
+    myChart.data.close = Array.from(obj.close);
     myChart.data.high = Array.from(obj.high);
     myChart.data.low = Array.from(obj.low);
     myChart.data.datasets[0].backgroundColor = [];
 
-    console.log(myChart.data.datasets[1].data); //////////z tym cos problem
+    myChart.data.labels = obj.labels;
 
     obj.open.forEach((element, index) => {
         //generowanie danych przez obliczanie roznicy otwarcia/zamknięcia
@@ -198,15 +201,17 @@ function updateChart(obj) {
     myChart.update();
 }
 
-let object = {
-    open: [3693, 3825, 3890, 3785, 3822, 3795, 4040],
-    close: [3823, 3885, 3787, 3817, 3791, 4040, 4005],
-    high: [3845, 3918, 3893, 3850, 3887, 4090, 4070],
-    low: [3629, 3770, 3760, 3732, 3780, 3753, 3964],
-    labels: ["1.01", "2.01", "3.01", "4.01", "5.01", "6.01", "7.01"]
-};
 
-updateChart(object);
+// let object = {
+//     open: [3693, 3825, 3890, 3785, 3822, 3795, 4040],
+//     close: [3823, 3885, 3787, 3817, 3791, 4040, 4005],
+//     high: [3845, 3918, 3893, 3850, 3887, 4090, 4070],
+//     low: [3629, 3770, 3760, 3732, 3780, 3753, 3964],
+//     labels: ["1.01", "2.01", "3.01", "4.01", "5.01", "6.01", "7.01"]
+// };
+
+// updateChart(object);
+
 
 export default myChart;
 export {generateLabels};
