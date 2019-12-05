@@ -160,12 +160,16 @@ const currencyFrom = document.querySelector('.currencyFrom');
 const currencyTo = document.querySelector('.currencyTo');
 const dateFrom = document.querySelector('#dateFrom');
 const dateTo = document.querySelector('#dateTo');
+const chart = document.querySelector('#chart');
+const legend = document.querySelector('#legend');
 
 chartButton.addEventListener('click', () => {
     if (!currencyFrom.value || !currencyTo.value || !dateFrom.value || !dateTo.value) {
         alert('Please fill all required fields');
         return;
     }
+    chart.style.display = 'block';
+    legend.style.display = 'none';
     let currFromSymbol = currencyFrom.value.split(",")[1].trim();
     let currToSymbol = currencyTo.value.split(",")[1].trim();
     let todayDate = new Date();
@@ -194,14 +198,6 @@ chartButton.addEventListener('click', () => {
         console.log(object);
     });
 })
-
-// let object = {
-//     open: [3693, 3825, 3890, 3785, 3822, 3795, 4040],
-//     close: [3823, 3885, 3787, 3817, 3791, 4040, 4005],
-//     high: [3845, 3918, 3893, 3850, 3887, 4090, 4070],
-//     low: [3629, 3770, 3760, 3732, 3780, 3753, 3964],
-//     labels: ["1.01", "2.01", "3.01", "4.01", "5.01", "6.01", "7.01"]
-//  };
 
 menuItems.forEach((el, index) => {
     el.addEventListener("click", () => {
