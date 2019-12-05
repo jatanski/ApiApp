@@ -1,7 +1,7 @@
 # Currency Conventer
 Project developed during 5th edition of CodersCamp
 
-# Demo
+## Demo
 https://juriakajurek.github.io/CurrencyConverter/dist/
 
 ## Features:
